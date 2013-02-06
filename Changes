@@ -1,2 +1,6 @@
+v0.002000   Feb 6, 2013
+ - Fix running under threads
+ - Fix early destruction of global var in ealier perl versions
+
 v0.001000   Feb 3, 2013
  - Initial release

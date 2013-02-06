@@ -2,10 +2,9 @@ package Devel::GlobalPhase;
 use strict;
 use warnings;
 
-our $VERSION = '0.001000';
+our $VERSION = '0.002000';
 $VERSION = eval $VERSION;
 
-use B ();
 use base 'Exporter';
 
 our @EXPORT = qw(global_phase);
@@ -36,6 +35,7 @@ END_CODE
 }
 else {
     eval <<'END_CODE' or die $@;
+use B ();
 
 my $global_phase = 'START';
 if (B::main_start()->isa('B::NULL')) {
@@ -55,7 +55,6 @@ else {
 }
 END { $global_phase = 'END' }
 
-use Carp ();
 sub global_phase () {
     if ($global_phase eq 'START') {
         # we use a CHECK block to set this as well, but we can't force
@@ -73,7 +72,8 @@ sub global_phase () {
     if ($global_phase eq 'RUN') {
         # END blocks are FILO so we can't install one to run first.
         # only way to detect END reliably seems to be by using caller.
-        # top two frames will be an eval and the END block.
+        # I hate this but it seems to be the best available option.
+        # The top two frames will be an eval and the END block.
         my $i;
         1 while CORE::caller(++$i);
         if ($i > 2) {
@@ -81,6 +81,7 @@ sub global_phase () {
             my @next = CORE::caller($i - 2);
             if (
                 $top[3] eq '(eval)'
+                && $next[3] =~ /::END$/
                 && $top[2] == $next[2]
                 && $top[1] eq $next[1]
                 && $top[0] eq 'main'
@@ -97,6 +98,10 @@ sub global_phase () {
 sub Tie::GlobalPhase::TIESCALAR { bless \(my $s), $_[0]; }
 sub Tie::GlobalPhase::STORE { die "Modification of a read-only value attempted"; }
 *Tie::GlobalPhase::FETCH = \&global_phase;
+sub Tie::GlobalPhase::DESTROY {
+    untie ${^GLOBAL_PHASE};
+    *{^GLOBAL_PHASE} = \(global_phase);
+}
 
 sub tie_global_phase {
     unless (defined ${^GLOBAL_PHASE}) {
@@ -126,8 +131,8 @@ Devel::GlobalPhase - Detect perl's global phase on older perls.
 
 =head1 DESCRIPTION
 
-Gives you the value L<perlvar/${^GLOBAL_PHASE}|${^GLOBAL_PHASE}>
-would in perls it doesn't exist in. The built in variable will be
+This gives access to L<${^GLOBAL_PHASE}|perlvar/${^GLOBAL_PHASE}>
+in versions of perl that don't provide it. The built in variable will be
 used if it is available.
 
 If all that is needed is detecting global destruction,
@@ -149,8 +154,8 @@ built in variable from newer perls.
 
 =head1 BUGS
 
-There are tricks that can be played with B that would fool this
-module for the INIT phase.
+There are tricks that can be played with B or XS that would fool this
+module for the INIT and END phase.
 
 =head1 AUTHOR
 
