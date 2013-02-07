@@ -22,4 +22,4 @@ requires:
 resources:
   homepage: http://github.com/haarg/Devel-GlobalPhase
   repository: git://github.com/haarg/Devel-GlobalPhase.git
-version: 0.002000
+version: 0.002001
