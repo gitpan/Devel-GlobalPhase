@@ -1,10 +1,10 @@
 {
    "abstract" : "Detect perl's global phase on older perls.",
    "author" : [
-      "Graham Knop <haarg@haarg.org>"
+      "haarg - Graham Knop (cpan:HAARG) <haarg@haarg.org>"
    ],
-   "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 6.64, CPAN::Meta::Converter version 2.120921",
+   "dynamic_config" : 1,
+   "generated_by" : "ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.141520",
    "license" : [
       "perl_5"
    ],
@@ -16,32 +16,33 @@
    "no_index" : {
       "directory" : [
          "t",
-         "inc"
+         "xt"
       ]
    },
    "prereqs" : {
-      "build" : {
-         "requires" : {
-            "ExtUtils::MakeMaker" : "0"
-         }
-      },
-      "configure" : {
-         "requires" : {
-            "ExtUtils::MakeMaker" : "0"
-         }
-      },
+      "build" : {},
+      "configure" : {},
       "runtime" : {
          "requires" : {
             "perl" : "5.008"
          }
-      }
+      },
+      "test" : {}
    },
    "release_status" : "stable",
    "resources" : {
-      "homepage" : "http://github.com/haarg/Devel-GlobalPhase",
+      "bugtracker" : {
+         "mailto" : "bug-Devel-GlobalPhase@rt.cpan.org",
+         "web" : "https://rt.cpan.org/Public/Dist/Display.html?Name=Devel-GlobalPhase"
+      },
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ],
       "repository" : {
-         "url" : "git://github.com/haarg/Devel-GlobalPhase.git"
+         "type" : "git",
+         "url" : "git://github.com/haarg/Devel-GlobalPhase.git",
+         "web" : "http://github.com/haarg/Devel-GlobalPhase"
       }
    },
-   "version" : "0.002001"
+   "version" : "0.002002"
 }

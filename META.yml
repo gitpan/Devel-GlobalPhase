@@ -1,25 +1,23 @@
 ---
 abstract: "Detect perl's global phase on older perls."
 author:
-  - 'Graham Knop <haarg@haarg.org>'
-build_requires:
-  ExtUtils::MakeMaker: 0
-configure_requires:
-  ExtUtils::MakeMaker: 0
-dynamic_config: 0
-generated_by: 'ExtUtils::MakeMaker version 6.64, CPAN::Meta::Converter version 2.120921'
+  - 'haarg - Graham Knop (cpan:HAARG) <haarg@haarg.org>'
+build_requires: {}
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.141520'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: Devel-GlobalPhase
 no_index:
   directory:
     - t
-    - inc
+    - xt
 requires:
-  perl: 5.008
+  perl: '5.008'
 resources:
-  homepage: http://github.com/haarg/Devel-GlobalPhase
+  bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Devel-GlobalPhase
+  license: http://dev.perl.org/licenses/
   repository: git://github.com/haarg/Devel-GlobalPhase.git
-version: 0.002001
+version: '0.002002'

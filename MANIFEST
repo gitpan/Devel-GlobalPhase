@@ -1,8 +1,9 @@
 Changes
 lib/Devel/GlobalPhase.pm
+maint/Makefile.PL.include
 Makefile.PL
 MANIFEST			This list of files
-MANIFEST.SKIP
+t/load-in-gd.t
 t/main.t
 t/minus_c.t
 t/runtime.t
@@ -12,3 +13,4 @@ t/threads.t
 t/tie.t
 META.yml                                 Module YAML meta-data (added by MakeMaker)
 META.json                                Module JSON meta-data (added by MakeMaker)
+README                                   README file (added by Distar)
